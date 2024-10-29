@@ -16,6 +16,8 @@ for Ctrl-F searching through multiple PDF files
 4. Run `python ocr.py <your pdf path>`
 - e.g. `python ocr.py readme.pdf` produces `_readme.txt`
 - it cleans up the intermediate directory
+- `<pdf path>` can also be a directory, then all pdf within will be converted
+- by default it skips existing `_pdfname.txt` files, but can enable overwrite by `--overwrite` flag. 
 
 ### Misc
 Yes pytesseract exists, wasn't able to get it working with PATH in win11

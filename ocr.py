@@ -9,7 +9,7 @@ INTERMEDIATE_PATH = "./intermediate"
 
 def pdf_to_text(pdf_path, tesseract_path=TESSERACT_PATH, intermediate_path=INTERMEDIATE_PATH):
     pdf_name = os.path.splitext(os.path.basename(pdf_path))[0]
-    output_text_file = f"_{pdf_name}.txt"
+    output_text_file = os.path.join(os.path.dirname(pdf_path), f"_{pdf_name}.txt")
 
     # Convert PDF pages to images
     os.makedirs(intermediate_path, exist_ok=True)
@@ -44,13 +44,33 @@ def pdf_to_text(pdf_path, tesseract_path=TESSERACT_PATH, intermediate_path=INTER
 
     return output_text_file
 
+def convert_pdf_in_directory(directory, skip_existing=True, tesseract_path=TESSERACT_PATH, intermediate_path=INTERMEDIATE_PATH):
+    for file in os.listdir(directory):
+        if file.endswith(".pdf"):
+            pdf_path = os.path.join(directory, file)
+            pdf_name = os.path.splitext(os.path.basename(pdf_path))[0]
+            output_text_file = os.path.join(directory, f"_{pdf_name}.txt")
+            
+            # Check if the output text file already exists
+            if os.path.exists(output_text_file) and skip_existing:
+                print(f"Skipping {pdf_path} as {output_text_file} already exists.")
+                continue
+            
+            text_file = pdf_to_text(pdf_path, tesseract_path, intermediate_path)
+            print(f"Output saved to {text_file}")
+    
+
 
 if __name__ == "__main__":
     # Set up command line argument parsing
     parser = argparse.ArgumentParser(description="Convert PDF to text using OCR.")
-    parser.add_argument("pdf_path", help="Path to the PDF file to be converted")
+    parser.add_argument("pdf_path", help="Path to the PDF file or directory to be converted")
+    parser.add_argument("--overwrite", action="store_true", help="Ignore existing output files and overwrite them")
     args = parser.parse_args()
 
-    # Usage:
-    text_file = pdf_to_text(args.pdf_path)
-    print(f"Output saved to {text_file}")
+    # If the provided path is a directory, convert all PDFs in the directory
+    if os.path.isdir(args.pdf_path):
+        convert_pdf_in_directory(args.pdf_path, skip_existing=not args.overwrite)
+    else:
+        text_file = pdf_to_text(args.pdf_path)
+        print(f"Output saved to {text_file}")

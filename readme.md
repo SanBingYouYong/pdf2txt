@@ -1,6 +1,7 @@
 # PDF-OCR-TXT
 for Ctrl-F searching through multiple PDF files 
 - to be used with vscode's search interface to highlight keyword occurence in which PDf file (namely course slides). 
+![search](./search_vscode.png)
 
 ## Get Started
 1. Install Tesseract:
@@ -13,7 +14,7 @@ for Ctrl-F searching through multiple PDF files
     - `pdf2image`
     - tested Python version: `3.12.7`
 3. Modify `TESSERACT_PATH` in `ocr.py` to your exe path
-4. Run `python ocr.py <your pdf path>`
+4. Run `python ocr.py <your pdf path/dir>`
 - e.g. `python ocr.py readme.pdf` produces `_readme.txt`
 - it cleans up the intermediate directory
 - `<pdf path>` can also be a directory, then all pdf within will be converted

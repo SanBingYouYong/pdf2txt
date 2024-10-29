@@ -21,6 +21,6 @@ for Ctrl-F searching through multiple PDF files
 - by default it skips existing `_pdfname.txt` files, but can enable overwrite by `--overwrite` flag. 
 
 ### Misc
-Yes pytesseract exists, wasn't able to get it working with PATH in win11
-Plan to work it into a ubuntu-based docker container and run it as a local service :P
+- Yes pytesseract exists, wasn't able to get it working with PATH in win11
+- Plan to work it into a ubuntu-based docker container and run it as a local service :P
 

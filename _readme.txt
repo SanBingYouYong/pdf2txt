@@ -5,26 +5,37 @@ PDF-OCR-TXT
 for Ctrl-F searching through multiple PDF files
 
 ¢ to be used with vscode's search interface to highlight keyword occurence in which PDf file (namely
+
+< e-greedy(Q)
+
+RL 3.2 - Temporal-Difference Control.txt
+
 course slides).
 
 Get Started
 
 1. Install Tesseract:
-© https://github.com/tesseract-ocr/tesseract
+° https://github.com/tesseract-ocr/tesseract
 © on Windows: use UB Mannheim's installer at https://github.com/UB-Mannheim/tesseract/wiki
 © record your install directory and the exe path
 = eg.C:/blablabla/tesseract.exe
-=™ make sure you can invoke it in arbitrary directory by C:/blablabla/tesseract.exe
-sample.pdf sample and it will generate a sample.txt containing the OCR text results.
+= make sure you can invoke it in arbitrary directory by C:/blablabla/tesseract.exe
+some.pdf somename and it will generate a sample.txt containing the OCR text results.
 2. Install dependencies:
 © pdf2image
 © tested Python version: 3.12.7
 3. Modify TESSERACT_ PATH in ocr. py to your exe path
-4.Run python ocr.py <your pdf path>
+4. Run python ocr.py <your pdf path/dir>
 
-Misc
+® eg.python ocr.py readme.pdf produces readme.txt
 
-Yes pytesseract exists, wasn't able to get it working with PATH in win11 Plan to work it into a ubuntu-based
+e it cleans up the intermediate directory
 
-docker container and run it as a local service @)
+e <pdf path> can also be a directory, then all pdf within will be converted
+
+¢ by default it skips existing _pdfname.txt files, but can enable overwrite by --overwrite flag.
+
+e Yes pytesseract exists, wasn't able to get it working with PATH in win11
+
+e Plan to work it into a ubuntu-based docker container and run it as a local service @
 
